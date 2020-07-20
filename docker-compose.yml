@@ -63,8 +63,34 @@ services:
     volumes:
       - registry:/var/lib/registry
 
+  sonarqube:
+    container_name: sonarqube
+    image: sonarqube:7.9-community
+    networks:
+      default:
+        aliases:
+          - sonarqube.demo.local
+    ports:
+      - "9000:9000"
+    restart: unless-stopped
+    stop_grace_period: 10m
+    volumes:
+      - sonarqube_conf:/opt/sonarqube/conf
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_temp:/opt/sonarqube/temp
+
 volumes:
   gitlab_config:
   gitlab_data:
   gitlab_logs:
   registry:
+  sonarqube_conf:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+  sonarqube_temp:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
