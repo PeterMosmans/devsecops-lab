@@ -1,0 +1,2 @@
+# Ignore local docker-compose override files
+docker-compose.override.yml
