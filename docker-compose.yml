@@ -84,8 +84,6 @@ volumes:
   gitlab_config:
   gitlab_data:
   gitlab_logs:
-  jenkins:
-    name: jenkins
   jenkins_home:
     name: jenkins_home
   registry:
