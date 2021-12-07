@@ -2,8 +2,13 @@
 DevSecOps Lab
 #############
 
-Accompanying repository for 3 courses on Automated Security Testing on
-Pluralsight
+Accompanying repository for the courses on Automated Security Testing on
+Pluralsight. Please note that these instructions can slightly differ from the
+ones being shown during the courses - this repository is leading.
+
++ https://app.pluralsight.com/library/courses/approaching-automated-security-testing-devsecops/table-of-contents
++ https://app.pluralsight.com/library/courses/performing-devsecops-automated-security-testing/table-of-contents
++ https://app.pluralsight.com/library/courses/integrating-automated-security-testing-tools/table-of-contents
 
 **************
 What is this ?
@@ -42,17 +47,17 @@ How to start
      getent group docker
 
 + Copy the file ``docker-compose.override.example.yml`` to
-  ``docker-compose-override.yml``, and ensure that the group ID is the same as
+  ``docker-compose.override.yml``, and ensure that the group ID is the same as
   your local ``docker`` group ID. In the example, the group ID is ``999``:
 
-    .. code-block:: yaml
+  .. code-block:: yaml
 
-       ---
-       version: "3.5"
+     ---
+     version: "3.5"
 
-       services:
-         jenkins:
-          user: ":999"
+     services:
+       jenkins:
+        user: ":999"
 
 That's it! Now you can execute ``docker-compose up --detach`` in this
 directory - this will spin up the servers in the background.
@@ -61,3 +66,17 @@ By default, Jenkins will listen on port 8080 (http), Gitlab on port 80 (http)
 and 7722 (ssh), and Sonarqube on port 8080 (http). You can override the port
 numbers in ``docker-compose.override.yml``. See the ``docker-compose.yml`` file
 for the correct syntax.
+
+The default Jenkins password can be found in the logfile..
+
+.. code-block:: console
+
+   docker logs jenkins
+
+..or can be read from the file system:
+
+.. code-block:: console
+
+   docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+
+The default GitLab password for user ``root`` can be found in ``docker-compose.yml``.
