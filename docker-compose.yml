@@ -44,11 +44,9 @@ services:
     ports:
       - "8080:8080"
     restart: unless-stopped
-    user: 1001:900 # jenkins:docker as the use needs to be able to start containers
+    user: :900 # part of the docker group as the user needs to be able to start containers
     volumes:
-      - /etc/passwd:/etc/passwd:ro # Ensure that user can be found/mapped
-      - /home/jenkins:/home/jenkins:rw # Enables the jenkins user to write .ssh/known_hosts
-      - /var/jenkins_home:/var/jenkins_home:rw # Workspace home
+      - jenkins_home:/var/jenkins_home:rw # Workspace home
       - /var/run/docker.sock:/var/run/docker.sock:ro # Allows Jenkins to stop/start containers
 
   registry:
@@ -86,6 +84,8 @@ volumes:
   gitlab_config:
   gitlab_data:
   gitlab_logs:
+  jenkins_home:
+    name: jenkins_home
   registry:
   sonarqube_conf:
   sonarqube_data:
