@@ -67,16 +67,17 @@ and 7722 (ssh), and Sonarqube on port 8080 (http). You can override the port
 numbers in ``docker-compose.override.yml``. See the ``docker-compose.yml`` file
 for the correct syntax.
 
-The default Jenkins password can be found in the logfile..
-
-.. code-block:: console
-
-   docker logs jenkins
-
-..or can be read from the file system:
+The default Jenkins password can be read from the jenkins container:
 
 .. code-block:: console
 
    docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 
-The default GitLab password for user ``root`` can be found in ``docker-compose.yml``.
+The default GitLab password for user ``root`` can be read from the gitlab
+container:
+
+.. code-block:: console
+
+   docker exec gitlab cat /etc/gitlab/initial_root_password
+
+
